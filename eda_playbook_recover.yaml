@@ -1,0 +1,12 @@
+---
+- name: recover
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  tasks:
+    - name: "recover device {{ ansible_eda.event.payload.id }}"
+      ansible.builtin.copy:
+        dest: /root/nodejs/{{ ansible_eda.event.payload.id }}.txt
+        content: |
+          active

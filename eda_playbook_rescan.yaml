@@ -1,0 +1,12 @@
+---
+- name: rescan
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  tasks:
+    - name: "rescan device {{ ansible_eda.event.payload.id }}"
+      ansible.builtin.copy:
+        dest: /root/nodejs/{{ ansible_eda.event.payload.id }}.txt
+        content: |
+          active
