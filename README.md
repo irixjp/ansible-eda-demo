@@ -6,6 +6,7 @@ docker run -d --name eda-demo -p 8080:8080 -p 8081:8081 -p 8082:8082 irixjp/ansi
 
 ブラウザで `http://localhost:8080/` へアクセス
 
+![images/initial_state.png](image/initial_state.png)
 
 コンソールへ接続
 ```
@@ -22,6 +23,9 @@ supervisorctl status
 ```
 supervisorctl start devices:*
 ```
+
+![images/error_state.png](images/error_state.png)
+
 
 エラー発生機を起動（ランダムにダミーデバイスを壊す）
 ```
@@ -40,8 +44,12 @@ supervisorctl start err_generator
 supervisorctl start monitoring
 ```
 
-EDAを起動
+EDAを起動(webhookを受け取って起動)
 ```
 ansible-rulebook -i inventory -r eda_rulebook.yaml -v
 ```
+
+全体概要
+
+![images/structure.png](images/structure.png)
 
