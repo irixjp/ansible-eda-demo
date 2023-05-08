@@ -6,7 +6,7 @@ docker run -d --name eda-demo -p 8080:8080 -p 8081:8081 -p 8082:8082 irixjp/ansi
 
 ブラウザで `http://localhost:8080/` へアクセス
 
-![images/initial_state.png](image/initial_state.png)
+![images/initial_state.png](images/initial_state.png)
 
 コンソールへ接続
 ```
