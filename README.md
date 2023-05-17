@@ -11,7 +11,6 @@ docker run -d --name eda-demo -p 8080:8080 -p 8081:8081 -p 8082:8082 irixjp/ansi
 コンソールへ接続
 ```
 docker exec -it eda-demo bash
-cd /root/nodejs
 ```
 
 デモパーツの状態を確認
