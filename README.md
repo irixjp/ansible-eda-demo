@@ -18,12 +18,10 @@ docker exec -it eda-demo bash
 supervisorctl status
 ```
 
-ダミーデバイスを起動
+ダミーデバイスを起動（起動すると徐々に青色に変わっていく）
 ```
 supervisorctl start devices:*
 ```
-
-![images/error_state.png](images/error_state.png)
 
 
 エラー発生機を起動（ランダムにダミーデバイスを壊す）
@@ -31,7 +29,9 @@ supervisorctl start devices:*
 supervisorctl start err_generator
 ```
 
-ブラウザで壊れた機器のIDを確認して、コマンドで復旧
+![images/error_state.png](images/error_state.png)
+
+ブラウザで壊れた機器のIDを確認して、コマンドで復旧（自動化以前の操作を体験）
 ```
 ./device_ops.sh 31 active
 ./device_ops.sh 13 active
@@ -43,7 +43,7 @@ supervisorctl start err_generator
 supervisorctl start monitoring
 ```
 
-EDAを起動(webhookを受け取って起動)
+EDAを起動(webhookを受け取ってPlaybookを実行)
 ```
 ansible-rulebook -i inventory -r eda_rulebook.yaml -v
 ```
