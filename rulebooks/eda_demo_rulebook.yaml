@@ -24,3 +24,10 @@
       run_job_template:
         name: Demo Automation 3
         organization: Default
+
+  - name: Message ALL received, action ALL executed
+    condition: event.payload.message == "ALL"
+    action:
+      run_job_template:
+        name: execute ALL jobs
+        organization: Default
