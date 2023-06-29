@@ -9,5 +9,6 @@
   - name: Handle Red Hat Insights event
     condition: event.payload is defined
     action:
-      debug:
-        msg: "Received: {{ event.payload }}"
+      run_job_template:
+        name: Demo Job Template
+        organization: Default
