@@ -29,5 +29,5 @@
     condition: event.payload.message == "ALL"
     action:
       run_job_template:
-        name: execute ALL jobs
+        name: Execute ALL jobs
         organization: Default
