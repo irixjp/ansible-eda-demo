@@ -4,7 +4,7 @@
       content: |
         #!/bin/bash
         echo ${@}
-      src: /root/test.sh
+      dest: /root/test.sh
       mode: 0755
 
   - command: /root/test.sh -i arg1 arg2
