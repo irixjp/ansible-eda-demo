@@ -1,10 +1,16 @@
 ---
-- name: Listen for webhook 8888
+- name: Listen for webhook 8883 & 8884 & 8885
   hosts: all
   sources:
   - ansible.eda.webhook:
       host: 0.0.0.0
-      port: 8888
+      port: 8883
+  - ansible.eda.webhook:
+      host: 0.0.0.0
+      port: 8884
+  - ansible.eda.webhook:
+      host: 0.0.0.0
+      port: 8885
   rules:
   - name: Message ID1 received, action ID1 executed
     condition: event.payload.message == "1"
