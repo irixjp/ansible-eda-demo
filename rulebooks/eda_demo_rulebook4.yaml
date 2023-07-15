@@ -1,0 +1,41 @@
+---
+- name: Listen for webhook 8886 & 8887
+  hosts: all
+  sources:
+  - ansible.eda.webhook:
+      host: 0.0.0.0
+      port: 8886
+  - ansible.eda.webhook:
+      host: 0.0.0.0
+      port: 8887
+  rules:
+  - name: Message ID1 received, action ID1 executed
+    condition: event.payload.message == "1"
+    action:
+      run_job_template:
+        name: Demo Automation 1
+        organization: Default
+  - name: Message ID2 received, action ID2 executed
+    condition: event.payload.message == "2"
+    action:
+      run_job_template:
+        name: Demo Automation 2
+        organization: Default
+  - name: Message ID3 received, action ID3 executed
+    condition: event.payload.message == "3"
+    action:
+      run_job_template:
+        name: Demo Automation 3
+        organization: Default
+  - name: Message ID ALL received, action ALL jobs executed
+    condition: event.payload.message == "ALL"
+    actions:
+      - run_job_template:
+          name: Demo Automation 1
+          organization: Default
+      - run_job_template:
+          name: Demo Automation 2
+          organization: Default
+      - run_job_template:
+          name: Demo Automation 3
+          organization: Default
