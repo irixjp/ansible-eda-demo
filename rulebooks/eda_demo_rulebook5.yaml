@@ -7,6 +7,6 @@
       port: 8888
   rules:
   - name: Print all event and vars
-    condition: true
+    condition: event is defined
     action:
       debug:
