@@ -7,6 +7,6 @@
       port: 8888
   rules:
   - name: Print all event and vars
-    condition: event is defined
+    condition: event.payload is defined
     action:
       debug:
