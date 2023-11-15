@@ -11,6 +11,6 @@
     action:
       debug:
         msg:
-          - "{{ event.payload.Host }}"
-          - "{{ event.payload.Problem }}"
+          - "{{ event.payload.host_host }}"
+          - "{{ event.payload.trigger_name }}"
           - "{{ event.payload.event_severity }}"
