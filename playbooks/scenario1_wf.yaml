@@ -1,0 +1,5 @@
+- hosts: all
+  tasks:
+    - name: Launch scenario1 workflow
+      awx.awx.workflow_launch:
+        workflow_template: "scenario 1 workflow1"
