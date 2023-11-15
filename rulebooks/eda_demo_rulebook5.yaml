@@ -17,4 +17,8 @@
         organization: Default
         job_args:
           extra_vars:
-            payloads: "{{ event.payload | to_string }}"
+            z_host_name: "{{ event.payload.host_host }}"
+            z_host_id: "{{ event.payload.host_id }}"
+            z_event_id: "{{ event.payload.event_id }}"
+            z_event_severity: "{{ event.payload.event_severity }}"
+            z_trigger_name: "{{ event.payload.trigger_name }}"
