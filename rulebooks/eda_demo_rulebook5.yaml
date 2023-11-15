@@ -7,7 +7,10 @@
       port: 8888
   rules:
   - name: Print all event and vars
-    condition: event.payload.host_host == 'demo-agent1' and event.payload.trigger_name == 'monitoring1_trigger1' and event.payload.event_severity == 'High'
+    condition: >-
+      event.payload.host_host == 'demo-agent1'
+      and event.payload.trigger_name == 'monitoring1_trigger1'
+      and event.payload.event_severity == 'High'
     action:
       debug:
         msg:
