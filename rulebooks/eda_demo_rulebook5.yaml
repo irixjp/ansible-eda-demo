@@ -7,8 +7,10 @@
       port: 8888
   rules:
   - name: Print all event and vars
-    condition: event.payload.Host == 'demo-agent1' and event.payload.Problem == 'monitoring2_trigger2' and event.payload.event_severity == 'High'
+    condition: event.payload is defined
     action:
       debug:
         msg:
-          - "{{ event.payload }}"
+          - "{{ event.payload.Host }}"
+          - "{{ event.payload.Problem }}"
+          - "{{ event.payload.event_severity }}"
