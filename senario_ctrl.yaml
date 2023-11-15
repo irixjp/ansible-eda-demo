@@ -1,0 +1,19 @@
+---
+- name: デモシナリオ開始/終了
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: シナリオ{{ senario_num }} 開始
+      ansible.builtin.file:
+        path: /tmp/senario{{ senario_num }}.txt
+        state: absent
+      when:
+        - senario_mode == 'start'
+
+    - name: シナリオ{{ senario_num }} 終了
+      ansible.builtin.file:
+        path: /tmp/senario{{ senario_num }}.txt
+        state: touch
+      when:
+        - senario_mode == 'end'
