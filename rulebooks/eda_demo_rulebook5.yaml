@@ -12,8 +12,9 @@
       and event.payload.trigger_name == 'monitoring1_trigger1'
       and event.payload.event_severity == 'High'
     action:
-      debug:
-        msg:
-          - "{{ event.payload.host_host }}"
-          - "{{ event.payload.trigger_name }}"
-          - "{{ event.payload.event_severity }}"
+      run_job_template:
+        name: senario1_action
+        organization: Default
+        job_args:
+          extra_vars:
+            payloads: "{{ event.payload }}"
