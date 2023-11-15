@@ -17,4 +17,4 @@
         organization: Default
         job_args:
           extra_vars:
-            payloads: "{{ event.payload }}"
+            payloads: "{{ event.payload | to_string }}"
