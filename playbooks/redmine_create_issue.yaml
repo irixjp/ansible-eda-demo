@@ -1,0 +1,42 @@
+- hosts: all
+  vars:
+    scenario_num: 1
+    project_id: 1
+    tracker_id: 3
+    issue_subject: (EDA-Zabbix)障害シナリオ {{ scenario_num }}
+    issue_desc: >-
+      障害シナリオ{{ scenario_num }}が発生しました。\n
+      詳細はこちらを確認してください\n
+      {{ zabbix_url }}zabbix.php?action=problem.view&hostids%5B0%5D={{ z_host_id }}
+  tasks:
+  - uri:
+      url: "{{ redmine_server_url + '/issues.json' }}"
+      method: POST
+      validate_certs: false
+      headers:
+        X-Redmine-API-Key: "{{ redmine_api_key }}"
+      body_format: json
+      body: |
+        {
+          "issue": {
+            "project_id": {{ project_id }},
+            "tracker_id": {{ tracker_id }},
+            "subject": "{{ issue_subject }}",
+            "description": "{{ issue_desc }}"
+          }
+        }
+      return_content: yes
+      status_code:
+      - 200
+      - 201
+      timeout: "5"
+    register: redmine_issue_search_result
+
+  - debug: var=redmine_issue_search_result
+  - debug: var=redmine_issue_search_result.json.issue.id
+
+  - set_stats:
+      data:
+        ticket_id: "{{ redmine_issue_search_result.json.issue.id }}"
+
+  - debug: var=ticket_id
