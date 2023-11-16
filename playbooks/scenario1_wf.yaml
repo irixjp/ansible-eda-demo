@@ -4,3 +4,9 @@
       awx.awx.workflow_launch:
         organization: Default
         workflow_template: "scenario1 workflow1"
+        extra_vars:
+          z_host_name: "{{ z_host_name }}"
+          z_event_severity: "{{ z_event_severity }}"
+          z_trigger_name: "{{ z_trigger_name }}"
+          z_host_id: "{{ z_host_id }}"
+          z_event_id: "{{ z_event_id }}"
