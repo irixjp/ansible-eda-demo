@@ -1,0 +1,32 @@
+- hosts: all
+  vars:
+    comment: >-
+      障害シナリオ{{ scenario_num }}にリカバー処理が実施されました。\n
+      結果は成功です。\n
+      ---\n
+      詳細はこちら \n
+      このチケットはクローズ可能です。
+  tasks:
+  - uri:
+      url: "{{ redmine_server_url + 'issues/' }}{{ ticket_id | string }}.json"
+      method: PUT
+      validate_certs: false
+      headers:
+        X-Redmine-API-Key: "{{ redmine_api_key }}"
+      body_format: json
+      body: |
+        {
+          "issue": {
+            "notes": "{{ comment }}"
+          }
+        }
+      return_content: yes
+      status_code:
+      - 200
+      - 204
+      timeout: "5"
+    register: redmine_issue_search_result
+
+  - debug: var=redmine_issue_search_result
+
+  - debug: var=vars
