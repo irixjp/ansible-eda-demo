@@ -8,6 +8,7 @@
 
   - set_fact:
       comment: >-
+        現在の状態を確認
         ps -ef
         <pre>{{ ret_ps.stdout }}</pre>
         /var/log/messages
@@ -37,3 +38,8 @@
   - debug: var=redmine_issue_search_result
 
   - debug: var=scenario_num
+
+  - name: Error for scenario branching
+    ansible.builtin.fail:
+      msg: Error for scenario branching
+    when: scenario_num == 2
