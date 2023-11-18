@@ -1,21 +1,17 @@
 - hosts: all
   tasks:
-  - shell: ps -ef | head -10
+  - shell: ps -ef | head -20
     register: ret_ps
 
-  - shell: tail -10 /var/log/messages
+  - shell: tail -20 /var/log/messages
     register: ret_log
 
   - set_fact:
       comment: >-
         ps -ef
-        <pre>
-        {{ ret_ps.stdout }}
-        </pre>
+        <pre>{{ ret_ps.stdout }}</pre>
         /var/log/messages
-        <pre>
-        {{ ret_log.stdout }}
-        </pre>
+        <pre>{{ ret_log.stdout }}</pre>
 
   - debug: var=comment
 
@@ -39,3 +35,5 @@
     register: redmine_issue_search_result
 
   - debug: var=redmine_issue_search_result
+
+  - debug: var=scenario_num
