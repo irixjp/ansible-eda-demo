@@ -1,10 +1,9 @@
 - hosts: all
   vars:
     issue_subject: (EDA-Zabbix)障害シナリオ {{ scenario_num }}
-    issue_desc: >-
-      障害シナリオ{{ scenario_num }}が発生しました。\n
-      詳細はこちらを確認してください\n
-      ---\n
+    issue_desc: |
+      障害シナリオ{{ scenario_num }}が発生しました。
+      詳細はこちらを確認してください
       {{ zabbix_url }}zabbix.php?action=problem.view&hostids%5B0%5D={{ z_host_id }}
   tasks:
   - uri:
