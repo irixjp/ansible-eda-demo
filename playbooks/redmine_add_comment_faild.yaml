@@ -1,0 +1,30 @@
+- hosts: all
+  vars:
+    comment: |
+      障害シナリオ{{ scenario_num }} 復旧に問題が確認されました。
+      このまま実行するか、状態を確認してください。
+      実行する場合は承認、しない場合は拒否を選択します。
+      ---
+      ジョブの状態 https://35.77.70.159/#/jobs/workflow/{{ awx_workflow_job_id }}/output
+      監視の状態 {{ zabbix_url }}zabbix.php?action=problem.view&hostids%5B0%5D={{ z_host_id }}
+  tasks:
+  - uri:
+      url: "{{ redmine_server_url + 'issues/' }}{{ ticket_id | string }}.json"
+      method: PUT
+      validate_certs: false
+      headers:
+        X-Redmine-API-Key: "{{ redmine_api_key }}"
+      body_format: json
+      body:
+        issue:
+          notes: "{{ comment }}"
+      return_content: yes
+      status_code:
+      - 200
+      - 204
+      timeout: "5"
+    register: redmine_issue_search_result
+
+  - debug: var=redmine_issue_search_result
+
+  - debug: var=vars
