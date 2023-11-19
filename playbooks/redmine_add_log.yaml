@@ -7,7 +7,7 @@
     register: ret_log
 
   - set_fact:
-      comment: >-
+      comment: |
         現在の状態を確認
         ps -ef
         <pre>{{ ret_ps.stdout }}</pre>

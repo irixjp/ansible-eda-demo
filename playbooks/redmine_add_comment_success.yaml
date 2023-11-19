@@ -1,10 +1,10 @@
 - hosts: all
   vars:
-    comment: >-
-      障害シナリオ{{ scenario_num }}にリカバー処理が実施されました。\n
-      結果は成功です。\n
-      ---\n
-      詳細はこちら \n
+    comment: |
+      障害シナリオ{{ scenario_num }}に復旧処理が実施されました。
+      結果は成功です。
+      ---
+      詳細はこちら: https://35.77.70.159/#/jobs/workflow/{{ awx_workflow_job_id }}/output
       このチケットはクローズ可能です。
   tasks:
   - uri:
@@ -14,12 +14,9 @@
       headers:
         X-Redmine-API-Key: "{{ redmine_api_key }}"
       body_format: json
-      body: |
-        {
-          "issue": {
-            "notes": "{{ comment }}"
-          }
-        }
+      body:
+        issue:
+          notes: "{{ comment }}"
       return_content: yes
       status_code:
       - 200
