@@ -1,0 +1,26 @@
+- hosts: all
+  vars:
+    ticket_id: 1
+    redmine_server_url: http://54.248.17.148:8888/
+    redmine_api_key: 64d9a495539f64d988a2513aa760a73548c65e2e
+  tasks:
+  - uri:
+      url: "{{ redmine_server_url + 'issues/' }}{{ ticket_id | string }}.json"
+      method: PUT
+      validate_certs: false
+      headers:
+        X-Redmine-API-Key: "{{ redmine_api_key }}"
+      body_format: json
+      body:
+        issue:
+          status_id: 5
+      return_content: yes
+      status_code:
+      - 200
+      - 204
+      timeout: "5"
+    register: redmine_issue_search_result
+
+  - debug: var=redmine_issue_search_result
+
+  - debug: var=vars

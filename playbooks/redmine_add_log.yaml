@@ -25,6 +25,7 @@
       body_format: json
       body:
         issue:
+          status_id: 2
           notes: "{{ comment }}"
 
       return_content: yes
