@@ -4,6 +4,7 @@
     issue_desc: >-
       障害シナリオ{{ scenario_num }}が発生しました。\n
       詳細はこちらを確認してください\n
+      ---\n
       {{ zabbix_url }}zabbix.php?action=problem.view&hostids%5B0%5D={{ z_host_id }}
   tasks:
   - uri:
@@ -13,15 +14,12 @@
       headers:
         X-Redmine-API-Key: "{{ redmine_api_key }}"
       body_format: json
-      body: |
-        {
-          "issue": {
-            "project_id": {{ project_id }},
-            "tracker_id": {{ tracker_id }},
-            "subject": "{{ issue_subject }}",
-            "description": "{{ issue_desc }}"
-          }
-        }
+      body:
+        issue:
+          project_id: "{{ project_id }}"
+          tracker_id: "{{ tracker_id }}"
+          subject: "{{ issue_subject }}"
+          description: "{{ issue_desc }}"
       return_content: yes
       status_code:
       - 200
