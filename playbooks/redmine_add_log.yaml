@@ -42,4 +42,4 @@
   - name: Error for scenario branching
     ansible.builtin.fail:
       msg: Error for scenario branching
-    when: scenario_num == 2
+    when: scenario_num == 2 or scenario_num == 3
